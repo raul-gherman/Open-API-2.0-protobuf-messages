@@ -226,7 +226,7 @@ message ProtoOATrader {
     optional int64 nonWithdrawableBonus = 6; // Broker's bonus that cannot be withdrew from the account as cash.
     optional ProtoOAAccessRights accessRights = 7 [default = FULL_ACCESS]; // Access rights that an owner has to the account in cTrader platform. See ProtoOAAccessRights for details.
     required int64 depositAssetId = 8; // Deposit currency of the account.
-    optional bool swapFree = 9; // If TRUE than account is Shariah compliant.
+    optional bool swapFree = 9; // If TRUE then account is Shariah compliant.
     optional uint32 leverageInCents = 10; // Account leverage (e.g. If leverage = 1:50 then value = 5000).
     optional ProtoOATotalMarginCalculationType totalMarginCalculationType = 11; // Margin computation type for the account (MAX, SUM, NET).
     optional uint32 maxLeverage = 12; // Maximum allowed leverage for the account. Used as validation when a Trader can change leverage value.
@@ -235,8 +235,8 @@ message ProtoOATrader {
     optional ProtoOAAccountType accountType = 15 [default = HEDGED]; // Account type: HEDGED, NETTED, etc.
     optional string brokerName = 16; // Some whitelabel assigned to trader by broker at the moment of account creation.
     optional int64 registrationTimestamp = 17; // Unix timestamp of the account registration. Should be used as minimal date in historical data requests.
-    optional bool isLimitedRisk = 18;
-    optional ProtoOALimitedRiskMarginCalculationStrategy limitedRiskMarginCalculationStrategy = 19;
+    optional bool isLimitedRisk = 18; // If TRUE then account is compliant to use specific margin calculation strategy.
+    optional ProtoOALimitedRiskMarginCalculationStrategy limitedRiskMarginCalculationStrategy = 19 [default = ACCORDING_TO_LEVERAGE]; // Special strategy used in margin calculations for this account (if account isLimitedRisk).
 }
 
 /** Position status ENUM. */
@@ -610,4 +610,5 @@ enum ProtoOAErrorCode {
 enum ProtoOALimitedRiskMarginCalculationStrategy {
     ACCORDING_TO_LEVERAGE = 0;
     ACCORDING_TO_GSL = 1;
+    ACCORDING_TO_GSL_AND_LEVERAGE = 2;
 }

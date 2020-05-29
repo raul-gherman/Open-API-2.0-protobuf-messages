@@ -583,6 +583,8 @@ enum ProtoOAErrorCode {
     SERVER_IS_UNDER_MAINTENANCE = 109; // Server is under maintenance.
     CHANNEL_IS_BLOCKED = 110; // Operations are not allowed for this account.
     CONNECTIONS_LIMIT_EXCEEDED = 67; // Limit of connections is reached for this Open API client.
+    WORSE_GSL_NOT_ALLOWED = 68; // Not allowed to increase risk for Positions with Guaranteed Stop Loss.
+    SYMBOL_HAS_HOLIDAY = 69; // Trading disabled because symbol has holiday.
 
     //Pricing
     NOT_SUBSCRIBED_TO_SPOTS = 112; // When trying to subscribe to depth, trendbars, etc. without spot subscription.
